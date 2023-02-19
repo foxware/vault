@@ -1,45 +1,34 @@
 
-import { useState } from "react";
-import {
-    Drawer,
-    ListItem,
-    ListItemIcon,
-    ListItemText
-  } from "@material-ui/core";
-  import {
-    CheckBoxOutlineBlankOutlined,
-    DraftsOutlined,
-    HomeOutlined,
-    InboxOutlined,
-    MailOutline,
-    ReceiptOutlined,
-  } from "@material-ui/icons";
+import React, { useState } from "react";
+import TextField from "@material-ui/core/TextField";
+import { Button, Paper } from "@material-ui/core";
+//import {  } from "@material-ui/core";
+//import {  } from "@material-ui/icons";
 
 
-const data = [
-    {
-      name: "Home",
-      icon: <HomeOutlined />,
-    },
-    { name: "Inbox", icon: <InboxOutlined /> },
-    { name: "Outbox", icon: <CheckBoxOutlineBlankOutlined /> },
-    { name: "Sent mail", icon: <MailOutline /> },
-    { name: "Draft", icon: <DraftsOutlined /> },
-    { name: "Trash", icon: <ReceiptOutlined /> },
-  ];
 
 export function AddItem() {
-    const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [textValue, setTextValue] = useState("");
 
-    return (
-      <div style={{ width: 250 }} onClick={() => setOpen(false)}>
-        <h1>Add Item</h1>
-        {data.map((item, index) => (
-          <ListItem button key={index}>
-            <ListItemIcon>{item.icon}</ListItemIcon>
-            <ListItemText primary={item.name} />
-          </ListItem>
-        ))}
-      </div>
-    );
+  const onTextChange = (e: any) => setTextValue(e.target.value);
+  const handleSubmit = () => console.log(textValue);
+  const handleReset = () => setTextValue("");    
+
+  return (
+  <div style={{ width: 700 }} onClick={() => setOpen(false)}>
+    <Paper>
+      <h2>Form Demo</h2>
+
+      <TextField
+        onChange={onTextChange}
+        value={textValue}
+        label={"Text Value"} //optional
+      />
+
+      <Button onClick={handleSubmit}>Submit</Button>
+      <Button onClick={handleReset}>Reset</Button>
+    </Paper>
+  </div>
+  );
 }
